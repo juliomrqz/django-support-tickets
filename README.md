@@ -1,1 +1,0 @@
-# django-support-tickets
