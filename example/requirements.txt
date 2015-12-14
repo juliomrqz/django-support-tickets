@@ -1,0 +1,2 @@
+django>=1.8.0
+django-support-tickets>=0.1.0
