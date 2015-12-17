@@ -2,11 +2,12 @@
 
 language: python
 
-python:
-  - "3.5"
-  - "3.4"
-  - "3.3"
-  - "2.7"
+env:
+  - TOXENV=py27-django18
+  - TOXENV=py27-django19
+  - TOXENV=py33-django18
+  - TOXENV=py34-django18
+  - TOXENV=py34-django19
 
 before_install:
   - pip install codecov
@@ -15,7 +16,7 @@ before_install:
 install: pip install -r requirements-test.txt
 
 # command to run tests using coverage, e.g. python setup.py test
-script: coverage run --source django_support_tickets runtests.py
+script: tox
 
 after_success:
   - codecov
