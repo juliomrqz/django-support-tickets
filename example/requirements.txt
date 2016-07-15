@@ -1,2 +1,5 @@
-django>=1.8.0
-django-support-tickets>=0.1.0
+# The app requirements.
+-r ../requirements_dev.txt
+
+# The app in editable mode.
+-e ../

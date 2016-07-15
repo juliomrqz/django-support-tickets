@@ -16,6 +16,19 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+import debug_toolbar
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^', include('demo.urls')),
+
+    url(r'^', include('support_tickets.urls', namespace='tickets')),
+
+    # THIRD-PARTY
+    # Account
+    url(r'^accounts/', include('allauth.urls')),
+
+    # Debug Toolbar
+    url(r'^__debug__/', include(debug_toolbar.urls)),
 ]
