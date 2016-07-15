@@ -3,4 +3,4 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-recursive-include django_support_tickets *.html *.png *.gif *js *.css *jpg *jpeg *svg *py
+recursive-include support_tickets *.html *.png *.gif *js *.css *jpg *jpeg *svg *py

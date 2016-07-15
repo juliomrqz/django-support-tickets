@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use Django-Support-Tickets in a project::
+To use django-support-tickets in a project::
 
-    import django_support_tickets
+    import support_tickets

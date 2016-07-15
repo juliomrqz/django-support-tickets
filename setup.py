@@ -4,14 +4,14 @@
 import os
 import sys
 
-import django_support_tickets
+import support_tickets
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-version = django_support_tickets.__version__
+version = support_tickets.__version__
 
 if sys.argv[-1] == 'publish':
     try:
@@ -33,7 +33,7 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='Django-Support-Tickets',
+    name='django-support-tickets',
     version=version,
     description="""A support tickets system made with Django""",
     long_description=readme + '\n\n' + history,
@@ -41,7 +41,7 @@ setup(
     author_email='j@bazzite.com',
     url='https://github.com/bazzite/django-support-tickets',
     packages=[
-        'django_support_tickets',
+        'support_tickets',
     ],
     include_package_data=True,
     install_requires=[

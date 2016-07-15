@@ -1,5 +1,5 @@
 =============================
-Django-Support-Tickets
+Django Support Tickets
 =============================
 
 .. image:: https://badge.fury.io/py/django-support-tickets.png
@@ -18,13 +18,13 @@ The full documentation is at https://django-support-tickets.readthedocs.org.
 Quickstart
 ----------
 
-Install Django-Support-Tickets::
+Install django-support-tickets::
 
     pip install django-support-tickets
 
 Then use it in a project::
 
-    import django_support_tickets
+    import support_tickets
 
 Features
 --------

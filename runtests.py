@@ -12,12 +12,12 @@ try:
                 "ENGINE": "django.db.backends.sqlite3",
             }
         },
-        ROOT_URLCONF="django_support_tickets.urls",
+        ROOT_URLCONF="support_tickets.urls",
         INSTALLED_APPS=[
             "django.contrib.auth",
             "django.contrib.contenttypes",
             "django.contrib.sites",
-            "django_support_tickets",
+            "support_tickets",
         ],
         SITE_ID=1,
         MIDDLEWARE_CLASSES=(),

@@ -10,7 +10,7 @@ Tests for `django-support-tickets` models module.
 
 from django.test import TestCase
 
-from django_support_tickets import models
+from support_tickets import models
 
 
 class TestDjango_support_tickets(TestCase):

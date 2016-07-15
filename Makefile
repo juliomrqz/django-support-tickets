@@ -24,7 +24,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 django_support_tickets tests
+	flake8 support_tickets tests
 
 test:
 	python runtests.py tests
@@ -33,7 +33,7 @@ test-all:
 	tox
 
 coverage:
-	coverage run --source django_support_tickets runtests.py tests
+	coverage run --source support_tickets runtests.py tests
 	coverage report -m
 	coverage html
 	open htmlcov/index.html
@@ -41,7 +41,7 @@ coverage:
 docs:
 	rm -f docs/django-support-tickets.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django_support_tickets
+	sphinx-apidoc -o docs/ support_tickets
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	open docs/_build/html/index.html
