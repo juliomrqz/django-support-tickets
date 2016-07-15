@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
+from django.conf.urls import url, include
 
-urlpatterns = []
+from .ticket import urls as ticket_urls
+
+
+urlpatterns = [
+    url(r'^tickets/', include(ticket_urls)),
+]

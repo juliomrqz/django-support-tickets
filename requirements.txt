@@ -13,3 +13,7 @@ django-markup==1.1
 django-multiupload==0.5.1
 
 django-treebeard==4.0.1
+
+django-betterforms==1.1.4
+
+django-braces==1.9.0

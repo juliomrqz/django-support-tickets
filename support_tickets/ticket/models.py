@@ -10,7 +10,7 @@ from model_utils.models import TimeStampedModel
 
 from ..base.choices import TICKET_STATUS, TICKET_PRIORITY
 from ..category.models import Category
-from ..conf import settings as tickets_settings
+from ..conf import settings as app_settings
 
 
 @python_2_unicode_compatible
@@ -62,7 +62,7 @@ class Ticket(TimeStampedModel):
         if not self.priority:
             self.priority = self.TICKET_PRIORITY.normal
 
-        if not self.agent and tickets_settings.AUTO_ASSIGN_DEFAULT_AGENT:
+        if not self.agent and app_settings.AUTO_ASSIGN_DEFAULT_AGENT:
             default_agent = self.category.default_agent
 
             if default_agent:

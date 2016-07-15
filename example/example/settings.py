@@ -127,15 +127,23 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Media files
+# https://docs.djangoproject.com/en/1.8/ref/settings/#media-root
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# https://docs.djangoproject.com/en/1.8/ref/settings/#media-url
+MEDIA_URL = '/media/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
 
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+# https://docs.djangoproject.com/en/1.8/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
 
 # Site id
 # https://docs.djangoproject.com/en/1.9/ref/contrib/sites/
