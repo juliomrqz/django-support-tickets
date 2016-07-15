@@ -9,3 +9,7 @@ django-autoslug==1.9.3
 
 markdown==2.6.6
 django-markup==1.1
+
+django-multiupload==0.5.1
+
+django-treebeard==4.0.1

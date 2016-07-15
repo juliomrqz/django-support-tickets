@@ -60,6 +60,9 @@ INSTALLED_APPS = (
 
     # Models & forms
     'crispy_forms',
+
+    # Needed for Django Support Tickets
+    'treebeard',
 )
 
 MIDDLEWARE_CLASSES = (

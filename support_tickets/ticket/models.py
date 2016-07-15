@@ -6,12 +6,11 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from django_markup.fields import MarkupField
 from model_utils.models import TimeStampedModel
 
 from ..base.choices import TICKET_STATUS, TICKET_PRIORITY
+from ..category.models import Category
 from ..conf import settings as tickets_settings
-from ..models import Category
 
 
 @python_2_unicode_compatible
@@ -55,13 +54,6 @@ class Ticket(TimeStampedModel):
         default=TICKET_PRIORITY.normal,
         help_text=_('1 = Highest Priority, 5 = Low Priority'),
     )
-
-    description = models.TextField(
-        _('Description'),
-        help_text=_('Include as much detail as possible, including the steps to reproduce, error message(s), screen shots, URLs, date/time/duration, etc. This information will accelerate our ability to help you.'),
-    )
-
-    markup = MarkupField(default='markdown')
 
     def __str__(self):
         return self.subject
