@@ -1,0 +1,103 @@
+{% extends "support_tickets/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load markup_tags %}
+
+{% block head_title %}{% trans "Tickets list" %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <section class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2>#{{ ticket.pk }}: {{ ticket.subject }}</h2>
+
+            <small>{% trans "Created" %}: {{ ticket.created }}</small>
+            <small>{% trans "Updated" %}: [updated]</small>
+          </div>
+          <div class="panel-body">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>{% trans "Agent" %}</th>
+                  <th>{% trans "Category" %}</th>
+                  <th>{% trans "Status" %}</th>
+                  <th>{% trans "Priority" %}</th>
+                  <th>{% trans "Options" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ ticket.agent }}</td>
+                  <td>{{ ticket.category }}</td>
+                  <td>{{ ticket.get_status_display }}</td>
+                  <td>{{ ticket.get_priority_display }}</td>
+                  <td>
+                    {% if ticket.is_open or ticket.is_reopened %}
+                    <a href="#">{% trans "Close" %}</a>
+                    {% elif ticket.is_resolved or ticket.is_closed %}
+                    <a href="#">{% trans "Open" %}</a>
+                    {% else %}
+                    <a href="#">{% trans "Submit a new ticket" %}</a>
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <section class="col-md-8 col-md-offset-2">
+          {% for comment in comments_list %}
+            <div class="row">
+                <div class="col-md-3">
+                  {{ comment.user }}
+                  <img class="media-object" src="..." alt="...">
+                </div>
+                <div class="panel panel-default col-md-9">
+                  <div class="panel-body">
+                    Posted on: {{ comment.created }}
+                    <hr>
+                    {{ comment.description | apply_markup:comment.markup }}
+
+                    {% if comment.attachments.all %}
+                      <hr>
+                      {% trans "Attachments" %}:
+
+                      <ul>
+                      {% for attachment in comment.attachments.all %}
+                        <li>{{ attachment.file_name }}</li>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+          {% endfor %}
+        </section>
+
+        <section class="col-md-8 col-md-offset-2" id="new-message-form">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              New message
+            </div>
+            <div class="panel-body">
+              <form class="markup" method="post" action="./#new-message-form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <button class="btn btn-success btn-block" type="submit">{% trans "Send message" %}</button>
+              </form>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+
+{% endblock %}

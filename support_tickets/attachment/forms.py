@@ -39,4 +39,3 @@ class AttachmentForm(forms.Form):
         super(AttachmentForm, self).__init__(*args, **kwargs)
 
         self.fields['attachments'].required = self.MINIMUM_ATTACHEMENTS > 0
-        # self.fields['attachments'].label = _('Tags (max tags)')

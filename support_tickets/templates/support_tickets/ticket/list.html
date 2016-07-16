@@ -1,0 +1,73 @@
+{% extends "support_tickets/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Tickets list" %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <section class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">{% trans "Tickets list" %}</div>
+          <div class="panel-body">
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>{% trans "ID" %}</th>
+                  <th>{% trans "Subject" %}</th>
+                  <th>{% trans "Last update" %}</th>
+                  <th>{% trans "Agent" %}</th>
+                  <th>{% trans "Category" %}</th>
+                  <th>{% trans "Status" %}</th>
+                  <th>{% trans "Priority" %}</th>
+                  <th>{% trans "Options" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ticket in ticket_list %}
+                  <tr>
+                    <td>{{ ticket.pk }}</td>
+                    <td>{{ ticket.subject }}</td>
+                    <td>[Last Update]</td>
+                    <td>{{ ticket.agent }}</td>
+                    <td>{{ ticket.category }}</td>
+                    <td>{{ ticket.get_status_display }}</td>
+                    <td>{{ ticket.get_priority_display }}</td>
+                    <td><a href="{% url 'tickets:ticket_detail' ticket.pk %}">{% trans "View" %}</a></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            {% if is_paginated %}
+              <nav>
+                <ul class="pager">
+                  {% if page_obj.has_previous %}
+                    <li>
+                      <a href="?page={{ page_obj.previous_page_number }}"><<</a>
+                    </li>
+                  {% endif %}
+
+                  <li>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                  </li>
+
+                  {% if page_obj.has_next %}
+                    <li>
+                      <a href="?page={{ page_obj.next_page_number }}">>></a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+{% endblock %}

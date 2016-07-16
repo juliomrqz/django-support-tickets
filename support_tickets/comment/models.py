@@ -20,14 +20,18 @@ class Comment(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    ticket = models.ForeignKey(Ticket)
+    ticket = models.ForeignKey(
+        Ticket,
+        related_name='comments',
+        verbose_name=_('Ticket'),
+    )
 
     description = models.TextField(
         _('Description'),
         help_text=_('Include as much detail as possible, including the steps to reproduce, error message(s), screen shots, URLs, date/time/duration, etc. This information will accelerate our ability to help you.'),
     )
 
-    markup = MarkupField(default='markdown')
+    markup = MarkupField(default='none')
 
     class Meta:
         ordering = ['-created', ]

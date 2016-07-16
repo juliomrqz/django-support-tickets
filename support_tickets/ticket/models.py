@@ -52,8 +52,28 @@ class Ticket(TimeStampedModel):
         _('Priority'),
         choices=TICKET_PRIORITY,
         default=TICKET_PRIORITY.normal,
-        help_text=_('1 = Highest Priority, 5 = Low Priority'),
+        help_text=_('1 = Highest Priority, 5 = Lowest Priority'),
     )
+
+    @property
+    def is_open(self):
+        return self.status == TICKET_STATUS.open
+
+    @property
+    def is_reopened(self):
+        return self.status == TICKET_STATUS.reopened
+
+    @property
+    def is_resolved(self):
+        return self.status == TICKET_STATUS.resolved
+
+    @property
+    def is_closed(self):
+        return self.status == TICKET_STATUS.closed
+
+    @property
+    def is_duplicate(self):
+        return self.status == TICKET_STATUS.duplicate
 
     def __str__(self):
         return self.subject

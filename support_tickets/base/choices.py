@@ -12,9 +12,9 @@ TICKET_STATUS = Choices(
 )
 
 TICKET_PRIORITY = Choices(
-    (1, 'critical', _('1. Critical')),
-    (2, 'high', _('2. High')),
-    (3, 'normal', _('3. Normal')),
-    (4, 'low', _('4. Low')),
-    (5, 'very_low', _('5. Very Low')),
+    (1, 'critical', _('Critical')),
+    (2, 'high', _('High')),
+    (3, 'normal', _('Normal')),
+    (4, 'low', _('Low')),
+    (5, 'very_low', _('Very Low')),
 )

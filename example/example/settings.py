@@ -63,6 +63,7 @@ INSTALLED_APPS = (
 
     # Needed for Django Support Tickets
     'treebeard',
+    'django_markup',
 )
 
 MIDDLEWARE_CLASSES = (
