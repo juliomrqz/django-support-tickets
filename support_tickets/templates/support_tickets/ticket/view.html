@@ -27,7 +27,6 @@
                   <th>{% trans "Category" %}</th>
                   <th>{% trans "Status" %}</th>
                   <th>{% trans "Priority" %}</th>
-                  <th>{% trans "Options" %}</th>
                 </tr>
               </thead>
               <tbody>
@@ -36,15 +35,6 @@
                   <td>{{ ticket.category }}</td>
                   <td>{{ ticket.get_status_display }}</td>
                   <td>{{ ticket.get_priority_display }}</td>
-                  <td>
-                    {% if ticket.is_open or ticket.is_reopened %}
-                    <a href="#">{% trans "Close" %}</a>
-                    {% elif ticket.is_resolved or ticket.is_closed %}
-                    <a href="#">{% trans "Open" %}</a>
-                    {% else %}
-                    <a href="#">{% trans "Submit a new ticket" %}</a>
-                    {% endif %}
-                  </td>
                 </tr>
               </tbody>
             </table>
@@ -55,9 +45,12 @@
         <section class="col-md-8 col-md-offset-2">
           {% for comment in comments_list %}
             <div class="row">
-                <div class="col-md-3">
-                  {{ comment.user }}
-                  <img class="media-object" src="..." alt="...">
+                <div class="col-md-3 text-center">
+                  <img class="img-thumbnail"
+                       alt="avatar"
+                       src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTVmNDM3MjI0MCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NWY0MzcyMjQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="
+                       style="width: 80px; height: 80px;">
+                  <div>{{ comment.user }}</div>
                 </div>
                 <div class="panel panel-default col-md-9">
                   <div class="panel-body">
@@ -71,7 +64,11 @@
 
                       <ul>
                       {% for attachment in comment.attachments.all %}
-                        <li>{{ attachment.file_name }}</li>
+                        <li>
+                          <a href="{{ attachment.file.url }}">
+                            {{ attachment.file_name }}
+                          </a>
+                        </li>
                       {% endfor %}
                       </ul>
                     {% endif %}

@@ -6,12 +6,15 @@ from django.contrib import admin
 class AttachmentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created'
     list_display = (
+        'name',
         'file',
         'uploader',
         'comment',
+        'created',
     )
     list_filter = ('created',)
     raw_id_fields = ('uploader', 'comment',)
+    readonly_fields = ('name', 'size',)
     search_fields = [
         'title',
         'uploader__first_name',
