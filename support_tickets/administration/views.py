@@ -71,7 +71,9 @@ class AdminTicketCreateView(SuccessMessageMixin, LoginRequiredMixin, SuperuserRe
         # Save the ticket first, because a comment needs a ticket before it
         # can be saved.
         ticket = form['ticket'].save(commit=False)
-        ticket.agent = user
+        # Make sure the ticket has an agent
+        if not ticket.agent:
+            ticket.agent = user
         ticket.save()
 
         # Save comment
