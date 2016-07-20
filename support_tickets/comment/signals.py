@@ -12,7 +12,10 @@ def notification_on_create_comment(sender, instance, created, **kwargs):
         instance.ticket.last_active = timezone.now()
         instance.ticket.save()
 
-        print '[comment created] Send email to submitter: %s' % (instance.ticket.submitter)
+        total_comments = instance.ticket.comments.count()
 
-        if instance.ticket.agent:
-            print '[comment created] Send email to agent: %s' % (instance.ticket.agent)
+        if total_comments > 1:
+            print '[comment created] Send email to submitter: %s' % (instance.ticket.submitter)
+
+            if instance.ticket.agent:
+                print '[comment created] Send email to agent: %s' % (instance.ticket.agent)
