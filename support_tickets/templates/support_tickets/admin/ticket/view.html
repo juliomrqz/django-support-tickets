@@ -1,0 +1,163 @@
+{% extends "support_tickets/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load markup_tags %}
+
+{% block head_title %}{% trans "Tickets list" %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>{% trans "Tiket" %} #{{ ticket.pk }}: {{ ticket.subject }}</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <section>
+          {% for comment in comments_list %}
+            <div class="row">
+                <div class="col-md-2 text-center">
+                  <img class="img-thumbnail"
+                       alt="avatar"
+                       src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTVmNDM3MjI0MCB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NWY0MzcyMjQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="
+                       style="width: 80px; height: 80px;">
+                  <div>{{ comment.user }}</div>
+                </div>
+                <div class="panel panel-default col-md-10">
+                  <div class="panel-body">
+                    {% trans "Posted on" %}: {{ comment.created }}
+                    <hr>
+                    {{ comment.description | apply_markup:comment.markup }}
+
+                    {% if comment.attachments.all %}
+                      <hr>
+                      {% trans "Attachments" %}:
+
+                      <ul>
+                      {% for attachment in comment.attachments.all %}
+                        <li>
+                          <a href="{{ attachment.file.url }}">
+                            {{ attachment.file_name }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+          {% endfor %}
+        </section>
+
+        <section id="new-message-form">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              {% trans "New message" %}
+            </div>
+            <div class="panel-body">
+              <form class="markup" method="post" action="./#new-message-form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <button class="btn btn-success btn-block" type="submit">{% trans "Send message" %}</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-md-4">
+        <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group" role="group">
+
+            {% if ticket.is_open != True and ticket.is_reopened != True %}
+              <a href="{% url 'tickets:admin_ticket_open' ticket.pk %}" class="btn btn-primary">{% trans "Open" %}</a>
+            {% else %}
+              <a href="{% url 'tickets:admin_ticket_close' ticket.pk %}" class="btn btn-primary">{% trans "Close" %}</a>
+            {% endif %}
+
+            <a href="{% url 'tickets:admin_ticket_delete' ticket.pk %}" class="btn btn-primary">{% trans "Delete" %}</a>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" href="#updateProperties{{ ticket.pk }}">
+            {% trans "Ticket Properties" %}
+          </div>
+
+          <div class="panel-body collapse" id="updateProperties{{ ticket.pk }}">
+            <form method="post" action="#update-properties">
+              {% csrf_token %}
+
+              {{ ticket_properties_form|crispy }}
+
+              <button class="btn btn-primary btn-block" type="submit">{% trans "Update" %}</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{ ticket.get_status_display }} - {{ ticket.get_priority_display }}
+          </div>
+
+          <div class="panel-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>{% trans "Created" %}</td>
+                  <td>{{ ticket.created }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Updated" %}</td>
+                  <td>[updated]</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Category" %}</td>
+                  <td>{{ ticket.category }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Agent" %}</td>
+                  <td>{{ ticket.agent }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {% trans "Submitter info" %}
+          </div>
+
+          <div class="panel-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>{% trans "Full Name" %}</td>
+                  <td>{{ ticket.submitter.first_name }} {{ ticket.submitter.last_name }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Username" %}</td>
+                  <td>{{ ticket.submitter.username }}</td>
+                </tr>
+                <tr>
+                  <td>{% trans "Date joined" %}</td>
+                  <td>{{ ticket.submitter.date_joined }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -25,7 +25,7 @@ urlpatterns = [
 
     url(r'^', include('demo.urls')),
 
-    url(r'^', include('support_tickets.urls', namespace='tickets')),
+    url(r'^tickets/', include('support_tickets.urls', namespace='tickets')),
 
     # THIRD-PARTY
     # Account

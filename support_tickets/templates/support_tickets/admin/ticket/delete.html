@@ -1,0 +1,31 @@
+{% extends "support_tickets/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Delete ticket" %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="row">
+      <section class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">{% trans "Delete ticket" %}</div>
+          <div class="panel-body">
+            <form class="login" method="post" action="{% url 'tickets:admin_ticket_delete' ticket.pk %}">
+              {% csrf_token %}
+
+              <p>{% trans "Are you sure you want to delete this ticket?" %}:</p>
+
+              <p>#{{ ticket.pk }}: <strong>{{ ticket.subject }}</strong></p>
+
+              <button class="btn btn-danger btn-block" type="submit">{% trans "Confirm ticket deletion" %}</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+{% endblock %}
