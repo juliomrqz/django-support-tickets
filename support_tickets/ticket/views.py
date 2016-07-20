@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
@@ -48,6 +50,9 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
                 comment=comment,
                 uploader=user
             )
+
+        # Send success message
+        messages.success(self.request, self.success_message)
 
         return redirect(self.get_success_url())
 
