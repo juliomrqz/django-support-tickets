@@ -26,7 +26,11 @@ from ..base.choices import TICKET_STATUS
 from .forms import TicketPropertiesForm, TicketCreationForm
 
 
-class AdminHomeView(LoginRequiredMixin, SuperuserRequiredMixin, ListView):
+class SuperuserRequiredExceptionMixin(LoginRequiredMixin, SuperuserRequiredMixin):
+    raise_exception = True
+
+
+class AdminHomeView(SuperuserRequiredExceptionMixin, ListView):
     context_object_name = 'ticket_list'
     model = Ticket
     paginate_by = 10
@@ -57,10 +61,12 @@ class AdminHomeView(LoginRequiredMixin, SuperuserRequiredMixin, ListView):
         return ticket
 
 
-class AdminTicketCreateView(SuccessMessageMixin, LoginRequiredMixin, SuperuserRequiredMixin, CreateView):
+class AdminTicketCreateView(SuperuserRequiredExceptionMixin, SuccessMessageMixin, CreateView):
     form_class = TicketCreationForm
     template_name = 'support_tickets/admin/ticket/create.html'
     success_message = _('The ticket was successfully created')
+
+    raise_exception = True
 
     def get_success_url(self):
         return reverse('tickets:admin_home')
@@ -96,7 +102,7 @@ class AdminTicketCreateView(SuccessMessageMixin, LoginRequiredMixin, SuperuserRe
         return redirect(self.get_success_url())
 
 
-class AdminTicketDetailView(SuccessMessageMixin, FormMixin, LoginRequiredMixin, SuperuserRequiredMixin, DetailView):
+class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin, FormMixin, DetailView):
     form_class = CommentCreationForm
     model = Ticket
     success_message = _('Your message was successfully sent')
@@ -172,7 +178,7 @@ class AdminTicketDetailView(SuccessMessageMixin, FormMixin, LoginRequiredMixin, 
             return self.form_invalid(form)
 
 
-class AdminTicketDeleteView(SuccessMessageMixin, LoginRequiredMixin, SuperuserRequiredMixin, DeleteView):
+class AdminTicketDeleteView(SuperuserRequiredExceptionMixin, SuccessMessageMixin, DeleteView):
     model = Ticket
     success_message = _('The ticket was successfully deleted')
     template_name = 'support_tickets/admin/ticket/delete.html'
@@ -181,7 +187,7 @@ class AdminTicketDeleteView(SuccessMessageMixin, LoginRequiredMixin, SuperuserRe
         return reverse('tickets:admin_home')
 
 
-class AdminTicketCloseView(LoginRequiredMixin, SuperuserRequiredMixin, SingleObjectMixin, View):
+class AdminTicketCloseView(SuperuserRequiredExceptionMixin, SingleObjectMixin, View):
     model = Ticket
     success_message = _('The ticket was successfully closed')
 
@@ -201,7 +207,7 @@ class AdminTicketCloseView(LoginRequiredMixin, SuperuserRequiredMixin, SingleObj
         return super(AdminTicketCloseView, self).get(request, *args, **kwargs)
 
 
-class AdminTicketOpenView(LoginRequiredMixin, SuperuserRequiredMixin, SingleObjectMixin, View):
+class AdminTicketOpenView(SuperuserRequiredExceptionMixin, SingleObjectMixin, View):
     model = Ticket
     success_message = _('The ticket was successfully opened')
 
