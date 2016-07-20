@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.encoding import python_2_unicode_compatible
 
+from model_utils import FieldTracker
 from model_utils.models import TimeStampedModel
 
 from ..base.choices import TICKET_STATUS, TICKET_PRIORITY
@@ -54,6 +56,10 @@ class Ticket(TimeStampedModel):
         default=TICKET_PRIORITY.normal,
         help_text=_('1 = Highest Priority, 5 = Lowest Priority'),
     )
+
+    last_active = models.DateTimeField(_("Last active"), default=timezone.now)
+
+    tracker = FieldTracker(fields=['agent', 'status'])
 
     @property
     def is_open(self):

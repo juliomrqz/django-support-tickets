@@ -6,3 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 class DjangoSupportTicketsConfig(AppConfig):
     name = 'support_tickets'
     verbose_name = _("Support Tickets")
+
+    def ready(self):
+        from .ticket.signals import *
+        from .comment.signals import *
