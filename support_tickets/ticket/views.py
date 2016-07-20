@@ -24,6 +24,7 @@ from .models import Ticket
 class TicketCreateView(LoginRequiredMixin, CreateView):
     form_class = TicketCreationForm
     template_name = 'support_tickets/ticket/create.html'
+    success_message = _('The ticket was successfully created')
 
     def get_success_url(self):
         return reverse('tickets:ticket_list')
