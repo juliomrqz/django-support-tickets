@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.shortcuts import redirect
@@ -184,6 +185,10 @@ class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
+
+        # Raise denied permission if ticket is closed
+        if self.object.status == TICKET_STATUS.closed:
+            raise PermissionDenied
 
         form = self.get_form()
 

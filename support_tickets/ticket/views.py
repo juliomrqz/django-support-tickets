@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -16,6 +17,7 @@ from django.views.generic.edit import FormMixin
 from braces.views import LoginRequiredMixin, UserPassesTestMixin
 
 from ..attachment.models import Attachment
+from ..base.choices import TICKET_STATUS
 from ..base.utils import send_email
 from ..comment.forms import CommentCreationForm
 from ..comment.models import Comment
@@ -142,6 +144,10 @@ class TicketDetailView(UserPassesTestMixin, SuccessMessageMixin, FormMixin, Deta
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
 
+        # Raise denied permission if ticket is closed
+        if self.object.status == TICKET_STATUS.closed:
+            raise PermissionDenied
+
         form = self.get_form()
 
         if form.is_valid():
@@ -166,6 +172,9 @@ class TicketDetailView(UserPassesTestMixin, SuccessMessageMixin, FormMixin, Deta
             # TODO: Send emails to agent and submitter
             self.send_agent_email(comment, self.object)
             self.send_submitter_email(comment, self.object)
+
+            # Send success message
+            messages.success(self.request, self.success_message)
 
             return self.form_valid(form)
 

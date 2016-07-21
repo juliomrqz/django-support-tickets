@@ -54,6 +54,7 @@
           {% endfor %}
         </section>
 
+        {% if not ticket.is_closed %}
         <section id="new-message-form">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -70,6 +71,7 @@
             </div>
           </div>
         </section>
+        {% endif %}
       </div>
 
       <div class="col-md-4">
