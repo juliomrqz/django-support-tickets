@@ -1,0 +1,10 @@
+Hello, {{ submitter.first_name }}
+
+Your ticket was successfully created.
+
+http://{{ website_domain }}{% url 'tickets:ticket_detail' ticket.pk %}.
+
+One of our agent will attend your request soon.
+
+Cheers,
+Website Team

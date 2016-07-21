@@ -1,0 +1,10 @@
+<p>Hello, {{ agent.first_name }}</p>
+
+<p>A new ticket was assigned to you.</p>
+
+<p><a href="http://{{ website_domain }}{% url 'tickets:admin_ticket_detail' ticket.pk %}">View Ticket</a></p>
+
+<p>
+Cheers,
+Website Team
+</p>

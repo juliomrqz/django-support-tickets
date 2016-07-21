@@ -1,0 +1,8 @@
+Hello, {{ agent.first_name }}
+
+A new comment is available in your ticket #{{ ticket.pk }}.
+
+http://{{ website_domain }}{% url 'tickets:admin_ticket_detail' ticket.pk %}
+
+Cheers,
+Website Team

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse
@@ -18,10 +19,11 @@ from django.views.generic.detail import SingleObjectMixin
 from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
 
 from ..attachment.models import Attachment
+from ..base.choices import TICKET_STATUS
+from ..base.utils import send_email
 from ..comment.forms import CommentCreationForm
 from ..comment.models import Comment
 from ..ticket.models import Ticket
-from ..base.choices import TICKET_STATUS
 
 from .forms import TicketPropertiesForm, TicketCreationForm
 
@@ -99,7 +101,40 @@ class AdminTicketCreateView(SuperuserRequiredExceptionMixin, SuccessMessageMixin
         # Send success message
         messages.success(self.request, self.success_message)
 
+        # TODO: Send emails to agent and submitter
+        self.send_agent_email(ticket)
+        self.send_submitter_email(ticket)
+
         return redirect(self.get_success_url())
+
+    def send_agent_email(self, ticket):
+        if ticket.agent != self.request.user:
+            send_email(
+                self.request,
+                "New ticket created",
+                ticket.agent.email,
+                settings.DEFAULT_FROM_EMAIL,
+                {
+                    'ticket': ticket,
+                    'agent': ticket.agent
+                },
+                'support_tickets/email/new_ticket_agent.txt',
+                'support_tickets/email/new_ticket_agent.html'
+            )
+
+    def send_submitter_email(self, ticket):
+        send_email(
+            self.request,
+            "New ticket created",
+            ticket.agent.email,
+            settings.DEFAULT_FROM_EMAIL,
+            {
+                'ticket': ticket,
+                'submitter': ticket.submitter
+            },
+            'support_tickets/email/new_ticket_submitter.txt',
+            'support_tickets/email/new_ticket_submitter.html'
+        )
 
 
 class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin, FormMixin, DetailView):
@@ -153,11 +188,6 @@ class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin
         form = self.get_form()
 
         if form.is_valid():
-            # Update status
-            new_status = form['ticket'].cleaned_data['status']
-            self.object.status = new_status
-            self.object.save()
-
             # Save comment
             comment = form['comment'].save(commit=False)
             comment.user = request.user
@@ -172,10 +202,44 @@ class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin
                     uploader=request.user
                 )
 
+            # Send email to ticket's submitter & agent
+            self.send_submitter_email(self.object)
+            self.send_agent_email(self.object)
+
             return self.form_valid(form)
 
         else:
             return self.form_invalid(form)
+
+    def send_submitter_email(self, ticket):
+        send_email(
+            self.request,
+            "New comment created",
+            ticket.agent.email,
+            settings.DEFAULT_FROM_EMAIL,
+            {
+                'ticket': ticket,
+                'submitter': ticket.submitter
+            },
+            'support_tickets/email/new_comment_submitter.txt',
+            'support_tickets/email/new_comment_submitter.html'
+        )
+
+    def send_agent_email(self, ticket):
+        if ticket.agent:
+            if ticket.agent != self.request.user:
+                send_email(
+                    self.request,
+                    "New comment created",
+                    ticket.agent.email,
+                    settings.DEFAULT_FROM_EMAIL,
+                    {
+                        'ticket': ticket,
+                        'agent': ticket.agent
+                    },
+                    'support_tickets/email/new_comment_agent.txt',
+                    'support_tickets/email/new_comment_agent.html'
+                )
 
 
 class AdminTicketDeleteView(SuperuserRequiredExceptionMixin, SuccessMessageMixin, DeleteView):
@@ -198,6 +262,9 @@ class AdminTicketCloseView(SuperuserRequiredExceptionMixin, SingleObjectMixin, V
             self.object.status = TICKET_STATUS.closed
             self.object.save()
 
+            # Send email to submitter
+            self.send_submitter_email(self.object)
+
             # Send success message
             messages.success(self.request, self.success_message)
 
@@ -206,10 +273,24 @@ class AdminTicketCloseView(SuperuserRequiredExceptionMixin, SingleObjectMixin, V
     def post(self, request, *args, **kwargs):
         return super(AdminTicketCloseView, self).get(request, *args, **kwargs)
 
+    def send_submitter_email(self, ticket):
+        send_email(
+            self.request,
+            "Your ticket #%s was closed" % (ticket.pk),
+            ticket.agent.email,
+            settings.DEFAULT_FROM_EMAIL,
+            {
+                'ticket': ticket,
+                'submitter': ticket.submitter
+            },
+            'support_tickets/email/closed_ticket_submitter.txt',
+            'support_tickets/email/closed_ticket_submitter.html'
+        )
+
 
 class AdminTicketOpenView(SuperuserRequiredExceptionMixin, SingleObjectMixin, View):
     model = Ticket
-    success_message = _('The ticket was successfully opened')
+    success_message = _('The ticket was successfully reopened')
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -218,6 +299,9 @@ class AdminTicketOpenView(SuperuserRequiredExceptionMixin, SingleObjectMixin, Vi
             self.object.status = TICKET_STATUS.reopened
             self.object.save()
 
+            # Send email to submitter
+            self.send_submitter_email(self.object)
+
             # Send success message
             messages.success(self.request, self.success_message)
 
@@ -225,3 +309,17 @@ class AdminTicketOpenView(SuperuserRequiredExceptionMixin, SingleObjectMixin, Vi
 
     def post(self, request, *args, **kwargs):
         return super(AdminTicketCloseView, self).get(request, *args, **kwargs)
+
+    def send_submitter_email(self, ticket):
+        send_email(
+            self.request,
+            "Your ticket #%s was reopen" % (ticket.pk),
+            ticket.agent.email,
+            settings.DEFAULT_FROM_EMAIL,
+            {
+                'ticket': ticket,
+                'submitter': ticket.submitter
+            },
+            'support_tickets/email/reopen_ticket_submitter.txt',
+            'support_tickets/email/reopen_ticket_submitter.html'
+        )

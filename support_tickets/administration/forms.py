@@ -15,7 +15,7 @@ class TicketPropertiesForm(forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ('status', 'category', 'priority', 'agent',)
+        fields = ('category', 'agent', 'status', 'priority', )
 
 
 class TicketForm(forms.ModelForm):
@@ -27,19 +27,7 @@ class TicketForm(forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ('subject', 'category', 'priority', 'submitter',)
-
-
-class TicketStatusForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(TicketStatusForm, self).__init__(*args, **kwargs)
-
-        self.fields['status'].empty_label = _('New status')
-
-    class Meta:
-        model = Ticket
-        fields = ('status',)
+        fields = ('subject', 'category', 'priority', 'submitter', 'agent',)
 
 
 class TicketCreationForm(MultiModelForm):

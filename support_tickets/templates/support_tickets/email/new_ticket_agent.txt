@@ -1,0 +1,8 @@
+Hello, {{ agent.first_name }}
+
+A new ticket was assigned to you.
+
+http://{{ website_domain }}{% url 'tickets:admin_ticket_detail' ticket.pk %}
+
+Cheers,
+Website Team

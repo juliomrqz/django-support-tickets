@@ -25,18 +25,6 @@ class TicketForm(forms.ModelForm):
         fields = ('subject', 'category', 'priority',)
 
 
-class TicketStatusForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(TicketStatusForm, self).__init__(*args, **kwargs)
-
-        self.fields['status'].empty_label = _('New status')
-
-    class Meta:
-        model = Ticket
-        fields = ('status',)
-
-
 class TicketCreationForm(MultiModelForm):
     form_classes = OrderedDict((
         ('ticket', TicketForm),

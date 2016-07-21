@@ -1,0 +1,12 @@
+<p>Hello, {{ submitter.first_name }}</p>
+
+<p>Your ticket was successfully created</p>
+
+<p><a href="http://{{ website_domain }}{% url 'tickets:ticket_detail' ticket.pk %}">View Ticket</a></p>
+
+<p>One of our agent will attend your request soon.</p>
+
+<p>
+Cheers,
+Website Team
+</p>

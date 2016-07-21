@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import (
     CreateView,
@@ -14,6 +16,7 @@ from django.views.generic.edit import FormMixin
 from braces.views import LoginRequiredMixin, UserPassesTestMixin
 
 from ..attachment.models import Attachment
+from ..base.utils import send_email
 from ..comment.forms import CommentCreationForm
 from ..comment.models import Comment
 
@@ -55,7 +58,18 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
         # Send success message
         messages.success(self.request, self.success_message)
 
+        # TODO: Send emails to agent and submitter
+        self.send_agent_email(ticket)
+        self.send_submitter_email(ticket)
+
         return redirect(self.get_success_url())
+
+    def send_agent_email(self, ticket):
+        if ticket.agent:
+            print('[ticket created] Message to agent')
+
+    def send_submitter_email(self, ticket):
+        print('[ticket created] Message to submitter')
 
 
 class TicketListView(LoginRequiredMixin, ListView):
@@ -131,9 +145,8 @@ class TicketDetailView(UserPassesTestMixin, SuccessMessageMixin, FormMixin, Deta
         form = self.get_form()
 
         if form.is_valid():
-            # Update status
-            new_status = form['ticket'].cleaned_data['status']
-            self.object.status = new_status
+            # Update last active field
+            self.object.last_active = timezone.now()
             self.object.save()
 
             # Save comment
@@ -150,7 +163,30 @@ class TicketDetailView(UserPassesTestMixin, SuccessMessageMixin, FormMixin, Deta
                     uploader=request.user
                 )
 
+            # TODO: Send emails to agent and submitter
+            self.send_agent_email(comment, self.object)
+            self.send_submitter_email(comment, self.object)
+
             return self.form_valid(form)
 
         else:
             return self.form_invalid(form)
+
+    def send_agent_email(self, comment, ticket):
+        if ticket.agent:
+            if ticket.agent != comment.user:
+                send_email(
+                    self.request,
+                    "New comment created",
+                    ticket.agent.email,
+                    settings.DEFAULT_FROM_EMAIL,
+                    {
+                        'ticket': ticket,
+                        'agent': ticket.agent
+                    },
+                    'support_tickets/email/new_comment_agent.txt',
+                    'support_tickets/email/new_comment_agent.html'
+                )
+
+    def send_submitter_email(self, comment, ticket):
+        pass

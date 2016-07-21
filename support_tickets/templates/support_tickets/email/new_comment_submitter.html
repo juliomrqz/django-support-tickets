@@ -1,0 +1,10 @@
+<p>Hello, {{ submitter.first_name }}</p>
+
+<p>A new comment is available in your ticket #{{ ticket.pk }}.</p>
+
+<p>You can review it clicking this link <a href="http://{{ website_domain }}{% url 'tickets:ticket_detail' ticket.pk %}">View Ticket</a></p>
+
+<p>
+Cheers,
+Website Team
+</p>

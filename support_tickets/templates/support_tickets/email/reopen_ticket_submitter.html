@@ -1,0 +1,10 @@
+<p>Hello, {{ submitter.first_name }}</p>
+
+<p>Your ticket #{{ ticket.pk }} was reopen.</p>
+
+<p><a href="http://{{ website_domain }}{% url 'tickets:ticket_detail' ticket.pk %}">View Ticket</a></p>
+
+<p>
+Cheers,
+Website Team
+</p>

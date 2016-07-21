@@ -1,0 +1,8 @@
+Hello, {{ submitter.first_name }}
+
+Your ticket #{{ ticket.pk }} was closed.
+
+http://{{ website_domain }}{% url 'tickets:ticket_detail' ticket.pk %}
+
+Cheers,
+Website Team
