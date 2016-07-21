@@ -10,6 +10,14 @@
 
   <div class="container">
 
+    <div class="alert alert-warning" role="alert">
+    {% if not ticket.agent %}
+      <strong>{% trans "Warning" %}!</strong> {% trans "This ticket doesn't have an assigned agent." %}
+    {% elif request.user != ticket.agent %}
+      <strong>{% trans "Warning" %}!</strong> {% trans "You are not the agent of this ticket." %}
+    {% endif %}
+    </div>
+
     <div class="row">
       <div class="col-md-12">
         <h3>{% trans "Tiket" %} #{{ ticket.pk }}: {{ ticket.subject }}</h3>
