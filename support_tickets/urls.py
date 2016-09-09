@@ -6,7 +6,7 @@ from .ticket import urls as ticket_urls
 
 
 urlpatterns = [
-    url(r'^tickets/', include(ticket_urls)),
+    url(r'^', include(ticket_urls)),
 
     url(r'^admin/', include(admin_urls)),
 ]
