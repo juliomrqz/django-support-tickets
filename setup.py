@@ -32,6 +32,9 @@ if sys.argv[-1] == 'tag':
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
+with open('requirements.txt') as f:
+    install_requires = f.read().splitlines()
+
 setup(
     name='django-support-tickets',
     version=version,
@@ -44,8 +47,7 @@ setup(
         'support_tickets',
     ],
     include_package_data=True,
-    install_requires=[
-    ],
+    install_requires=install_requires,
     license="Apache",
     zip_safe=False,
     keywords='django-support-tickets',
