@@ -61,7 +61,7 @@
                     <td>{{ ticket.agent }}</td>
                     <td>{{ ticket.get_status_display }}</td>
                     <td>{{ ticket.get_priority_display }}</td>
-                    <td>[Last Update]</td>
+                    <td>{{ ticket.last_active }}</td>
                     <td><a href="{% url 'tickets:admin_ticket_detail' ticket.pk %}">{% trans "View" %}</a></td>
                   </tr>
                 {% endfor %}

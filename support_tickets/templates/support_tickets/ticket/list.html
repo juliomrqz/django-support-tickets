@@ -32,7 +32,7 @@
                   <tr>
                     <td>{{ ticket.pk }}</td>
                     <td>{{ ticket.subject }}</td>
-                    <td>[Last Update]</td>
+                    <td>{{ ticket.last_active }}</td>
                     <td>{{ ticket.agent }}</td>
                     <td>{{ ticket.category }}</td>
                     <td>{{ ticket.get_status_display }}</td>

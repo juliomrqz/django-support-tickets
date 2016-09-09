@@ -16,7 +16,7 @@
             <h2>#{{ ticket.pk }}: {{ ticket.subject }}</h2>
 
             <small>{% trans "Created" %}: {{ ticket.created }}</small>
-            <small>{% trans "Updated" %}: [updated]</small>
+            <small>{% trans "Updated" %}: {{ ticket.last_active }}</small>
           </div>
           <div class="panel-body">
 
