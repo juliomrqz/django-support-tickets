@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import (
     CreateView,
@@ -193,6 +194,10 @@ class AdminTicketDetailView(SuperuserRequiredExceptionMixin, SuccessMessageMixin
         form = self.get_form()
 
         if form.is_valid():
+            # Update last active field
+            self.object.last_active = timezone.now()
+            self.object.save()
+
             # Save comment
             comment = form['comment'].save(commit=False)
             comment.user = request.user
