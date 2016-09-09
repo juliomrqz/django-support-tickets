@@ -102,7 +102,7 @@
           </div>
 
           <div class="panel-body collapse" id="updateProperties{{ ticket.pk }}">
-            <form method="post" action="#update-properties">
+            <form method="post" action="{% url 'tickets:admin_ticket_properties_update' ticket.pk %}">
               {% csrf_token %}
 
               {{ ticket_properties_form|crispy }}

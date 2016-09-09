@@ -40,4 +40,10 @@ urlpatterns = [
         view=views.AdminTicketOpenView.as_view(),
         name="admin_ticket_open",
     ),
+
+    url(
+        regex=r"^ticket/(?P<pk>\d+)/properties/$",
+        view=views.AdminTicketPropertiesUpdateView.as_view(),
+        name="admin_ticket_properties_update",
+    ),
 ]
