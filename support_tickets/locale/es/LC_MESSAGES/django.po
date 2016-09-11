@@ -1,0 +1,398 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-11 20:40+0000\n"
+"PO-Revision-Date: 2016-09-11 21:01+0000\n"
+"Last-Translator: Jennifer Elliott <admin@example.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.12\n"
+
+#: support_tickets/administration/forms.py:26
+#: support_tickets/ticket/forms.py:21
+msgid "Select a category"
+msgstr "Seleciona una categoría"
+
+#: support_tickets/administration/views.py:79
+#: support_tickets/ticket/views.py:32
+msgid "The ticket was successfully created"
+msgstr "El ticket se ha creado correctamente"
+
+#: support_tickets/administration/views.py:124
+#: support_tickets/ticket/views.py:96
+msgid "Your message was successfully sent"
+msgstr "Su mensaje fue enviado con éxito"
+
+#: support_tickets/administration/views.py:206
+msgid "The ticket was successfully deleted"
+msgstr "El ticket se ha eliminado correctamente"
+
+#: support_tickets/administration/views.py:215
+msgid "The ticket was successfully closed"
+msgstr "El ticket se cerró con éxito"
+
+#: support_tickets/administration/views.py:238
+msgid "The ticket was successfully reopened"
+msgstr "El ticket fue abierto de nuevo con éxito"
+
+#: support_tickets/administration/views.py:262
+msgid "Your changes were successfully saved."
+msgstr "Los cambios se han guardado correctamente."
+
+#: support_tickets/apps.py:8
+msgid "Support Tickets"
+msgstr "Tickets de Soporte"
+
+#: support_tickets/attachment/forms.py:20
+#, python-format
+msgid "Between %s and %s files"
+msgstr "Entre %s y %s archivos"
+
+#: support_tickets/attachment/forms.py:24
+#: support_tickets/attachment/forms.py:27
+#, python-format
+msgid "Maximum %s files"
+msgstr "Máximo %s archivos"
+
+#: support_tickets/attachment/forms.py:29
+#, python-format
+msgid "(under <%s each)"
+msgstr "(menos de <%s cada uno)"
+
+#: support_tickets/attachment/models.py:22
+msgid "File name"
+msgstr "Nombre de archivo"
+
+#: support_tickets/attachment/models.py:28
+#: support_tickets/attachment/models.py:70
+msgid "Attachment"
+msgstr "Archivo adjunto"
+
+#: support_tickets/attachment/models.py:35
+#: support_tickets/comment/models.py:38
+msgid "Comment"
+msgstr "Comentario"
+
+#: support_tickets/attachment/models.py:41
+msgid "Uploader"
+msgstr "Cargador de archivo"
+
+#: support_tickets/attachment/models.py:46
+msgid "File Size"
+msgstr "Tamaño del archivo"
+
+#: support_tickets/attachment/models.py:49
+msgid "File size in bytes"
+msgstr "Tamaño del archivo en bytes"
+
+#: support_tickets/attachment/models.py:71
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:47
+#: support_tickets/templates/support_tickets/ticket/view.html:63
+msgid "Attachments"
+msgstr "Archivos adjuntos"
+
+#: support_tickets/base/choices.py:7
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:90
+msgid "Open"
+msgstr "Abrir"
+
+#: support_tickets/base/choices.py:8
+msgid "Reopened"
+msgstr "Reabierto"
+
+#: support_tickets/base/choices.py:9
+msgid "Resolved"
+msgstr "Resuelto"
+
+#: support_tickets/base/choices.py:10
+msgid "Closed"
+msgstr "Cerrado"
+
+#: support_tickets/base/choices.py:11
+msgid "Duplicate"
+msgstr "Duplicar"
+
+#: support_tickets/base/choices.py:15
+msgid "Critical"
+msgstr "Crítico"
+
+#: support_tickets/base/choices.py:16
+msgid "High"
+msgstr "Alto"
+
+#: support_tickets/base/choices.py:17
+msgid "Normal"
+msgstr "Normal"
+
+#: support_tickets/base/choices.py:18
+msgid "Low"
+msgstr "Bajo"
+
+#: support_tickets/base/choices.py:19
+msgid "Very Low"
+msgstr "Muy bajo"
+
+#: support_tickets/base/notifications.py:12
+#: support_tickets/base/notifications.py:27
+msgid "New ticket created"
+msgstr "Nuevo ticket creado"
+
+#: support_tickets/base/notifications.py:42
+#, python-format
+msgid "Your ticket #%s was closed"
+msgstr "Tu ticket #%s fue cerrado"
+
+#: support_tickets/base/notifications.py:57
+#, python-format
+msgid "Your ticket #%s was reopen"
+msgstr "Tu ticket #%s fue reabierto"
+
+#: support_tickets/base/notifications.py:72
+msgid "New comment created"
+msgstr "Nuevo comentario creado"
+
+#: support_tickets/category/models.py:36
+msgid "Default agent"
+msgstr "Agente predeterminado"
+
+#: support_tickets/category/models.py:49
+#: support_tickets/templates/support_tickets/admin/home.html:46
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:132
+#: support_tickets/templates/support_tickets/ticket/list.html:24
+#: support_tickets/templates/support_tickets/ticket/view.html:27
+#: support_tickets/ticket/models.py:28
+msgid "Category"
+msgstr "Categoría"
+
+#: support_tickets/category/models.py:50
+msgid "Categories"
+msgstr "Categorías"
+
+#: support_tickets/comment/models.py:19
+msgid "User"
+msgstr "Usuario"
+
+#: support_tickets/comment/models.py:26 support_tickets/ticket/models.py:101
+msgid "Ticket"
+msgstr "Ticket"
+
+#: support_tickets/comment/models.py:30
+msgid "Description"
+msgstr "Descripción"
+
+#: support_tickets/comment/models.py:31
+msgid ""
+"Include as much detail as possible, including the steps to reproduce, error "
+"message(s), screen shots, URLs, date/time/duration, etc. This information "
+"will accelerate our ability to help you."
+msgstr ""
+"Incluya tantos detalles como sea posible, incluyendo los pasos para "
+"reproducir su error, mensaje(s) de error, capturas de pantalla, las "
+"direcciones URL, fecha / hora / duración, etc. Esta información acelerará "
+"nuestra capacidad para ayudarle."
+
+#: support_tickets/comment/models.py:39
+msgid "Comments"
+msgstr "Comentarios"
+
+#: support_tickets/templates/support_tickets/admin/home.html:6
+#: support_tickets/templates/support_tickets/admin/home.html:37
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:7
+#: support_tickets/templates/support_tickets/ticket/list.html:6
+#: support_tickets/templates/support_tickets/ticket/list.html:14
+#: support_tickets/templates/support_tickets/ticket/view.html:7
+msgid "Tickets list"
+msgstr "Lista de tickets"
+
+#: support_tickets/templates/support_tickets/admin/home.html:15
+msgid "Create ticket"
+msgstr "Crear ticket"
+
+#: support_tickets/templates/support_tickets/admin/home.html:21
+msgid "All tickets"
+msgstr "Todos los tickets"
+
+#: support_tickets/templates/support_tickets/admin/home.html:24
+msgid "Open tickets"
+msgstr "Abrir ticket"
+
+#: support_tickets/templates/support_tickets/admin/home.html:27
+msgid "Closed tickets"
+msgstr "Tickets cerrados"
+
+#: support_tickets/templates/support_tickets/admin/home.html:43
+#: support_tickets/templates/support_tickets/ticket/list.html:20
+msgid "ID"
+msgstr "Identificación"
+
+#: support_tickets/templates/support_tickets/admin/home.html:44
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:124
+#: support_tickets/templates/support_tickets/ticket/view.html:18
+msgid "Created"
+msgstr "Creado"
+
+#: support_tickets/templates/support_tickets/admin/home.html:45
+#: support_tickets/ticket/models.py:35
+msgid "Submitter"
+msgstr "Remitente"
+
+#: support_tickets/templates/support_tickets/admin/home.html:47
+msgid "Assigned to"
+msgstr "Asignado a"
+
+#: support_tickets/templates/support_tickets/admin/home.html:48
+#: support_tickets/templates/support_tickets/ticket/list.html:25
+#: support_tickets/templates/support_tickets/ticket/view.html:28
+#: support_tickets/ticket/models.py:48
+msgid "Status"
+msgstr "Estado"
+
+#: support_tickets/templates/support_tickets/admin/home.html:49
+#: support_tickets/templates/support_tickets/ticket/list.html:26
+#: support_tickets/templates/support_tickets/ticket/view.html:29
+#: support_tickets/ticket/models.py:54
+msgid "Priority"
+msgstr "Prioridad"
+
+#: support_tickets/templates/support_tickets/admin/home.html:50
+#: support_tickets/templates/support_tickets/ticket/list.html:22
+msgid "Last update"
+msgstr "Última actualización"
+
+#: support_tickets/templates/support_tickets/admin/home.html:51
+#: support_tickets/templates/support_tickets/ticket/list.html:27
+msgid "Options"
+msgstr "Opciones"
+
+#: support_tickets/templates/support_tickets/admin/home.html:65
+#: support_tickets/templates/support_tickets/ticket/list.html:40
+msgid "View"
+msgstr "Ver"
+
+#: support_tickets/templates/support_tickets/admin/ticket/create.html:6
+#: support_tickets/templates/support_tickets/admin/ticket/create.html:14
+#: support_tickets/templates/support_tickets/admin/ticket/create.html:25
+#: support_tickets/templates/support_tickets/ticket/create.html:6
+#: support_tickets/templates/support_tickets/ticket/create.html:14
+#: support_tickets/templates/support_tickets/ticket/create.html:25
+msgid "Create a ticket"
+msgstr "Crear un ticket"
+
+#: support_tickets/templates/support_tickets/admin/ticket/delete.html:6
+#: support_tickets/templates/support_tickets/admin/ticket/delete.html:14
+msgid "Delete ticket"
+msgstr "Eliminar ticket"
+
+#: support_tickets/templates/support_tickets/admin/ticket/delete.html:19
+msgid "Are you sure you want to delete this ticket?"
+msgstr "¿Está seguro de que quiere eliminar este ticket?"
+
+#: support_tickets/templates/support_tickets/admin/ticket/delete.html:23
+msgid "Confirm ticket deletion"
+msgstr "Confirmar la eliminación del ticket"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:15
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:17
+msgid "Warning"
+msgstr "Advertencia"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:15
+msgid "This ticket doesn't have an assigned agent."
+msgstr "Este ticket no tiene un agente asignado."
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:17
+msgid "You are not the agent of this ticket."
+msgstr "Usted no es el agente de este ticket."
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:23
+msgid "Tiket"
+msgstr "Tiket"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:41
+msgid "Posted on"
+msgstr "Publicado el"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:69
+msgid "New message"
+msgstr "Nuevo mensaje"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:77
+#: support_tickets/templates/support_tickets/ticket/view.html:93
+msgid "Send message"
+msgstr "Enviar mensaje"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:92
+msgid "Close"
+msgstr "Cerrar"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:95
+msgid "Delete"
+msgstr "Eliminar"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:101
+msgid "Ticket Properties"
+msgstr "Propiedades del ticket"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:110
+msgid "Update"
+msgstr "Actualizar"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:128
+#: support_tickets/templates/support_tickets/ticket/view.html:19
+msgid "Updated"
+msgstr "Actualizado"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:136
+#: support_tickets/templates/support_tickets/ticket/list.html:23
+#: support_tickets/templates/support_tickets/ticket/view.html:26
+#: support_tickets/ticket/models.py:44
+msgid "Agent"
+msgstr "Agente"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:146
+msgid "Submitter info"
+msgstr "Datos de Remitente"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:153
+msgid "Full Name"
+msgstr "Nombre completo"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:157
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: support_tickets/templates/support_tickets/admin/ticket/view.html:161
+msgid "Date joined"
+msgstr "Fecha de Registro"
+
+#: support_tickets/templates/support_tickets/ticket/list.html:21
+#: support_tickets/ticket/models.py:21
+msgid "Subject"
+msgstr "Asunto"
+
+#: support_tickets/ticket/models.py:23
+msgid "Type a brief summary of your question or issue."
+msgstr "Escriba un breve resumen de su pregunta o problema."
+
+#: support_tickets/ticket/models.py:57
+msgid "1 = Highest Priority, 5 = Lowest Priority"
+msgstr "1 = Prioridad más alta, 5 = Prioridad más baja"
+
+#: support_tickets/ticket/models.py:60
+msgid "Last active"
+msgstr "Última actividad"
+
+#: support_tickets/ticket/models.py:102
+msgid "Tickets"
+msgstr "Tickets"
