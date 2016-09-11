@@ -8,6 +8,7 @@ import django.utils.timezone
 import django_markup.fields
 import model_utils.fields
 import support_tickets.base.fields
+import support_tickets.base.utils
 
 
 class Migration(migrations.Migration):
@@ -26,7 +27,7 @@ class Migration(migrations.Migration):
                 ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('name', models.CharField(blank=True, max_length=80, verbose_name='File name')),
-                ('file', models.FileField(upload_to='support/tickets/attachments', verbose_name='Attachment')),
+                ('file', models.FileField(upload_to=support_tickets.base.utils.UploadTo(), verbose_name='Attachment')),
                 ('size', models.BigIntegerField(blank=True, help_text='File size in bytes', null=True, verbose_name='File Size')),
             ],
             options={

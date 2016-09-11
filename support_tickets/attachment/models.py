@@ -12,6 +12,7 @@ from django.template.defaultfilters import truncatechars
 from model_utils.models import TimeStampedModel
 
 from ..comment.models import Comment
+from ..base.utils import UploadTo
 
 
 @python_2_unicode_compatible
@@ -25,7 +26,7 @@ class Attachment(TimeStampedModel):
 
     file = models.FileField(
         _('Attachment'),
-        upload_to='support/tickets/attachments'
+        upload_to=UploadTo()
     )
 
     comment = models.ForeignKey(
