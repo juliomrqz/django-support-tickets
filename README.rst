@@ -26,10 +26,10 @@ Then use it in a project::
 
     import support_tickets
 
-Features
+Todo
 --------
 
-* TODO
+* Unit tests
 
 Running Tests
 --------------
