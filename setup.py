@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import io
 import os
 import sys
 
@@ -29,10 +30,10 @@ if sys.argv[-1] == 'tag':
     os.system("git push --tags")
     sys.exit()
 
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+readme = io.open('README.rst', encoding='utf-8').read()
+history = io.open('HISTORY.rst', encoding='utf-8').read().replace('.. :changelog:', '')
 
-with open('requirements.txt') as f:
+with io.open('requirements.txt', encoding='utf-8') as f:
     install_requires = f.read().splitlines()
 
 setup(
