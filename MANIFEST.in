@@ -3,4 +3,5 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
+include requirements.txt
 recursive-include support_tickets *.html *.png *.gif *js *.css *.po *.mo *jpg *jpeg *svg *py
