@@ -2,53 +2,75 @@
 Django Support Tickets
 =============================
 
-.. image:: https://badge.fury.io/py/django-support-tickets.png
+.. image:: https://badge.fury.io/py/django-support-tickets.svg
     :target: https://badge.fury.io/py/django-support-tickets
 
-.. image:: https://travis-ci.org/bazzite/django-support-tickets.png?branch=master
+.. image:: https://travis-ci.org/bazzite/django-support-tickets.svg?branch=master
     :target: https://travis-ci.org/bazzite/django-support-tickets
 
-A support tickets system made with Django
+.. image:: https://codecov.io/gh/bazzite/django-support-tickets/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/bazzite/django-support-tickets
+
+Another Support Tickets Django App
 
 Documentation
 -------------
 
-The full documentation is at https://django-support-tickets.readthedocs.org.
+The full documentation is at https://django-support-tickets.bazzite.com.
 
 Quickstart
 ----------
 
-Install django-support-tickets::
+Install Django Support Tickets::
 
     pip install django-support-tickets
 
-Then use it in a project::
+Add it to your `INSTALLED_APPS`:
 
-    import support_tickets
+.. code-block:: python
 
-Todo
+    INSTALLED_APPS = (
+        ...
+        'support_tickets.apps.SupportTicketsConfig',
+        ...
+    )
+
+Add Django Support Tickets's URL patterns:
+
+.. code-block:: python
+
+    from support_tickets import urls as support_tickets_urls
+
+
+    urlpatterns = [
+        ...
+        url(r'^', include(support_tickets_urls)),
+        ...
+    ]
+
+Features
 --------
 
-* Unit tests
+* TODO
 
 Running Tests
---------------
+-------------
 
 Does the code actually work?
 
 ::
 
     source <YOURVIRTUALENV>/bin/activate
-    (myenv) $ pip install -r requirements-text.txt
-    (myenv) $ python runtests.py
+    (myenv) $ pip install tox
+    (myenv) $ tox
 
 Credits
----------
+-------
 
 Tools used in rendering this package:
 
 *  Cookiecutter_
-*  `cookiecutter-pypackage`_
+*  `cookiecutter-djangopackage`_
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`cookiecutter-pypackage`: https://github.com/pydanny/cookiecutter-djangopackage
+.. _`cookiecutter-djangopackage`: https://github.com/pydanny/cookiecutter-djangopackage

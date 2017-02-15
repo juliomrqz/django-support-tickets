@@ -36,8 +36,8 @@ is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-django-support-tickets could always use more documentation, whether as part of the
-official django-support-tickets docs, in docstrings, or even on the web in blog posts,
+Django Support Tickets could always use more documentation, whether as part of the
+official Django Support Tickets docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
@@ -72,16 +72,16 @@ Ready to contribute? Here's how to set up `django-support-tickets` for local dev
 
     $ git checkout -b name-of-your-bugfix-or-feature
 
-Now you can make your changes locally.
+   Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass flake8 and the
-tests, including testing other Python versions with tox::
+   tests, including testing other Python versions with tox::
 
-    $ flake8 support_tickets tests
-    $ python setup.py test
-    $ tox
+        $ flake8 support_tickets tests
+        $ python setup.py test
+        $ tox
 
-To get flake8 and tox, just pip install them into your virtualenv.
+   To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
