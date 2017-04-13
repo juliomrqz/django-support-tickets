@@ -16,7 +16,7 @@ Another Support Tickets Django App
 Documentation
 -------------
 
-The full documentation is at https://django-support-tickets.bazzite.com.
+The full documentation is at https://docs.bazzite.com/django-support-tickets/.
 
 Quickstart
 ----------
